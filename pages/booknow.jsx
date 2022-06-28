@@ -13,6 +13,7 @@ const BookNow = () => {
     <>
       <Head>
         <title>Take A Look | SHFT-in</title>
+        <link rel="icon" href="/Logo.png" />
       </Head>
 
       <section className="container grid md:grid-cols-2 mx-auto sm:px-0 px-4 md:py-5">

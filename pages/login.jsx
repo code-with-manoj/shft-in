@@ -2,11 +2,11 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Formik, Form, Field } from "formik";
-import { useRouter } from "next/router";
+import Router from "next/router";
 import Baseurl from "./Baseurl";
 import axios from "axios";
 const Login = () => {
-  const router = useRouter();
+  // const router = useRouter();
   // Sign-in
   const signin = (data) => {
     let url = `${Baseurl()}`;
@@ -15,7 +15,7 @@ const Login = () => {
       .then((res) => {
         // console.log(res.data.Token);
         localStorage.setItem("shft-in", res.data.Token);
-        router.push("/", { state: res });
+        Router.push("/", { state: res });
       })
       .catch((err) => {
         console.log(err);

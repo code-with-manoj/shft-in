@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AiFillCaretDown,
   AiFillCaretUp,
   AiOutlineSearch,
 } from "react-icons/ai";
-import { FiMenu } from "react-icons/fi";
+import { BiLogOut } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
@@ -27,7 +27,16 @@ const Navbar = () => {
       name: "Faridabad",
     },
   ];
-  const token = null;
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("shft-in");
+    setToken(token);
+  }, []);
+
+  const logout = () => {
+    localStorage.removeItem("shft-in");
+  };
 
   const [hamb, setHamb] = useState();
   const [loc, setLoc] = useState();
@@ -118,7 +127,7 @@ const Navbar = () => {
           </section>
           {/* About Profile */}
           {token === null ? (
-            <div className="md:flex hidden items-center space-x-2 sm:flex-row flex-col">
+            <div className="flex  items-center space-x-2 sm:flex-row flex-col">
               <Link href="/login">
                 <span className="tracking-wider hover:text-[#f1922e] cursor-pointer font-semibold pr-3 lg:pr-4">
                   Login
@@ -143,38 +152,55 @@ const Navbar = () => {
             </span> */}
             </div>
           ) : (
-            <div className="flex   sm:flex-row flex-col">
-              <div className="flex items-center flex-col">
-                <figure className=" w-20 h-20 rounded-full bg- bg-gray-100 p-0.5">
-                  <Image
+            <div className="flex items-start flex-col">
+              <div className="flex relative items-center flex-col md:flex-row ">
+                <figure className="p-0.5 bg-orange-400 w-8 h-8 md:w-10 md:h-10 flex items-center shadow-xl rounded-full mr-2 justify-center  ">
+                  <img
                     src="/profile.jpg"
                     alt="user"
-                    width={100}
-                    height={100}
-                    className="w-full h-full rounded-full border object-cover"
+                    onClick={() => setHamb(!hamb)}
+                    className="rounded-full w-full h-full cursor-pointer  border object-cover"
                   />
                 </figure>
-                <span className="tracking-widest text-white font-semibold text-xl">
-                  Manoj Kushwah
-                </span>
+                {/* Pop */}
+                <div
+                  className={
+                    hamb
+                      ? "bg-white z-10 rounded-tl-lg rounded-b-sm shadow-xl absolute w-36 border-orange-400  top-10 right-8"
+                      : "hidden"
+                  }
+                >
+                  <div className="py-1 rounded-tl-lg text-sm bg-orange-400  text-center tracking-widest capitalize">
+                    Manoj Kushwah
+                  </div>
+                  <div
+                    onClick={() => {
+                      logout();
+                      setHamb(!hamb);
+                      window.location.reload();
+                    }}
+                    className="p-3 py-2 flex text-sm items-center cursor-pointer font-semibold bg-white rounded-b-sm"
+                  >
+                    Log Out <BiLogOut className="text-xl ml-2" />
+                  </div>
+                </div>
               </div>
             </div>
           )}
 
-          <FiMenu
+          {/* <FiMenu
             onClick={() => setHamb(!hamb)}
             className="md:hidden text-xl font-bold"
-          />
+          /> */}
           {/* Sidebar */}
-          <div
+          {/* <div
             className={
               hamb
                 ? "absolute top-0 p-5 md:hidden h-screen  bg-[rgb(241,146,46,0.99)] sm:w-3/4 w-40 transition-all duration-150  left-0 z-10"
                 : "absolute md:hidden top-0 p-5 h-screen  bg-[rgb(241,146,46,0.99)] sm:w-3/4 w-40 transition-all duration-150  -left-full z-10"
             }
           >
-            {/* About Profile */}
-          </div>
+          </div> */}
         </div>
       </header>
       {/* Nav-menu */}

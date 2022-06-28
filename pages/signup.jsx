@@ -14,7 +14,7 @@ const Signup = () => {
       .post(url, data)
       .then((res) => {
         console.log(res);
-        router.push("/");
+        router.push("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -62,6 +62,7 @@ const Signup = () => {
                     id="username"
                     name="username"
                     type="text"
+                    required
                     placeholder="username"
                     className="tracking-wider p-1 px-2 border-2 border-gray-300 outline-none rounded-md"
                   />
@@ -78,6 +79,7 @@ const Signup = () => {
                     id="phone"
                     name="phone"
                     type="tel"
+                    required
                     maxLength={10}
                     placeholder="Phone"
                     className="tracking-wider p-1 px-2 border-2 border-gray-300 outline-none rounded-md"
@@ -92,6 +94,7 @@ const Signup = () => {
                     Email
                   </label>
                   <Field
+                    required
                     id="email"
                     name="email"
                     type="email"
@@ -108,6 +111,7 @@ const Signup = () => {
                     Password
                   </label>
                   <Field
+                    required
                     id="password"
                     name="password"
                     type="password"
